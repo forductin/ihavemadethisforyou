@@ -508,37 +508,67 @@ button:hover {
     /* Container adjustments */
     .container {
         padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
+    /* Envelope wrapper centering */
+    .envelope-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     /* Envelope smaller on mobile */
     .envelope {
         width: 280px;
         height: 200px;
+        position: relative;
+        left: auto;
+        transform: none;
     }
 
     /* Letter adjustments */
     .letter {
         width: 260px;
         padding: 25px 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .envelope.open .letter {
-        transform: translateX(-50%) translateY(-50%) scale(1.1);
-        width: 90%;
-        max-width: 350px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) scale(1);
+        width: 85%;
+        max-width: 320px;
+        height: auto;
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .text strong {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+        display: block;
+        margin-bottom: 15px;
     }
 
     .text p {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 1rem;
+        line-height: 1.6;
     }
 
     .sticker {
-        width: 60px;
+        width: 50px;
+        margin-bottom: 10px;
     }
 
     /* Click hint smaller */
@@ -629,26 +659,37 @@ button:hover {
 
 /* Extra small mobile devices */
 @media screen and (max-width: 480px) {
+    .container {
+        padding-top: 20px;
+    }
+
     .envelope {
-        width: 240px;
-        height: 170px;
+        width: 260px;
+        height: 185px;
     }
 
     .letter {
-        width: 220px;
-        padding: 20px 15px;
+        width: 240px;
+        padding: 20px 18px;
     }
 
     .envelope.open .letter {
-        width: 92%;
+        width: 88%;
+        max-width: 300px;
+        max-height: 65vh;
     }
 
     .text strong {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .text p {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .sticker {
+        width: 45px;
     }
 
     .click-hint {
