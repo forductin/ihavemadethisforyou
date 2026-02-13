@@ -1,0 +1,625 @@
+:root {
+    --primary: #d35400;
+    /* Burnt Orange for hearts/accents */
+    --envelope-bg: #f1c40f;
+    /* Sunflower Yellow */
+    --envelope-shadow: #f39c12;
+    /* Darker Gold/Orange */
+    --envelope-dark: #e67e22;
+    /* Even darker for depth */
+    --letter-bg: #fffbf0;
+    /* Warm white */
+    --text-color: #2c3e50;
+    /* Dark Slate */
+    --accent: #e67e22;
+    --bg-gradient-start: #fef9e7;
+    /* Very light yellow */
+    --bg-gradient-end: #f9e79f;
+    /* Soft yellow */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 50px;
+}
+
+/* Starry Night Background */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #fff 0%, #ffa500 50%, #ff6b00 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px 4px rgba(255, 140, 0, 0.9),
+        0 0 25px 6px rgba(255, 100, 0, 0.7),
+        0 0 35px 8px rgba(255, 200, 0, 0.5),
+        inset 0 0 5px rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    pointer-events: all;
+    animation: twinkle 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 100, 0, 0.6);
+}
+
+.star:hover {
+    transform: scale(2);
+    box-shadow: 0 0 25px 8px rgba(255, 140, 0, 1),
+        0 0 40px 12px rgba(255, 100, 0, 0.9),
+        0 0 60px 15px rgba(255, 200, 0, 0.7),
+        inset 0 0 8px rgba(255, 255, 255, 1);
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* Memory Modal */
+.memory-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.memory-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--letter-bg) 0%, #fff5e1 100%);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideIn 0.4s ease;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--accent);
+}
+
+.memory-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.memory-text {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Star Hint */
+.star-hint {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    z-index: 100;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--envelope-dark);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.star-hint.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    animation: fadeOutAfter 5s ease forwards;
+}
+
+@keyframes fadeOutAfter {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+/* Hint Style */
+.envelope-wrapper {
+    background: transparent;
+    position: relative;
+    width: 320px;
+    height: 220px;
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Back of Envelope */
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: var(--envelope-bg);
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 40%);
+    /* Fade away */
+}
+
+.envelope.open::before {
+    opacity: 1;
+}
+
+/* Common Side/Bottom Pocket Styles */
+.pocket {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s 1s ease;
+    pointer-events: none;
+}
+
+.envelope.open .pocket {
+    opacity: 0;
+}
+
+/* Left Pocket */
+.pocket.left {
+    z-index: 3;
+    background-color: var(--envelope-shadow);
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+
+/* Right Pocket */
+.pocket.right {
+    z-index: 3;
+    background-color: var(--envelope-shadow);
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
+
+/* Bottom Pocket */
+.pocket.bottom {
+    z-index: 4;
+    background-color: var(--envelope-dark);
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+}
+
+/* The Flap */
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: var(--envelope-bg);
+    clip-path: polygon(0 0, 100% 0, 50% 51%);
+    transform-origin: top;
+    transition: transform 0.4s ease, z-index 0.2s 0.2s;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+    /* Moves behind letter */
+}
+
+/* The Letter */
+.letter {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 90%;
+    height: 80%;
+    background: var(--letter-bg);
+    z-index: 2;
+    /* Inside the envelope */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.6s 0.4s ease;
+    border-radius: 4px;
+}
+
+/* Hidden Photo Behind Letter */
+.hidden-photo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 80%;
+    z-index: 1;
+    /* Behind letter (letter is z:2) */
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.hidden-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hidden-photo.revealed {
+    opacity: 1;
+    z-index: 15;
+    /* Above everything when revealed */
+}
+
+.letter.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.envelope.open .letter {
+    /* Pop out and scale up */
+    transform: translateX(-50%) translateY(-50%) scale(1.40);
+    z-index: 10;
+}
+
+/* Typography */
+.text {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-color);
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.text strong {
+    font-size: 1.2rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.text em {
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--accent);
+}
+
+.sticker {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 27px;
+    height: 65px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    z-index: 15;
+}
+
+/* Controls */
+/* Reset buttons removed */
+
+button {
+    padding: 12px 25px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    color: var(--envelope-dark);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: var(--accent);
+}
+
+/* Hint Style */
+.click-hint {
+    position: absolute;
+    top: 15%;
+    /* Position above/left of envelope */
+    left: 50%;
+    transform: translateX(-180px) rotate(-10deg);
+    /* Move to left side */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+    pointer-events: none;
+    /* Let clicks pass through if overlapping, or use js to handle click */
+    animation: float 3s ease-in-out infinite;
+    transition: opacity 0.5s;
+}
+
+.hint-text {
+    font-family: 'Playfair Display', serif;
+    /* Or a handwriting font if available, but Playfair is nice */
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--envelope-dark);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.arrow-svg {
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+    transform: rotate(10deg) scale(1.5);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateX(-180px) rotate(-10deg) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-180px) rotate(-10deg) translateY(-15px);
+    }
+}
+
+/* Second Hint */
+.second-hint {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--envelope-dark);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+    transition: opacity 0.8s ease;
+    z-index: 25;
+}
+
+.second-hint.visible {
+    opacity: 1;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+/* Sneaky Crab */
+.crab-container {
+    position: fixed;
+    bottom: -10px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    z-index: 900;
+    transform: translateY(100px) rotate(-20deg);
+    /* Start hidden below */
+}
+
+.crab-container.active {
+    animation: crabPeek 4s 1s ease-in-out forwards;
+    /* Wait 1s after envelope opens, then peek */
+}
+
+.crab-container img {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes crabPeek {
+    0% {
+        transform: translateY(100px) rotate(-20deg);
+    }
+
+    20% {
+        transform: translateY(0) rotate(0deg);
+        /* Pop up */
+    }
+
+    25% {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    30% {
+        transform: translateY(0) rotate(10deg);
+    }
+
+    35% {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    /* Wiggle */
+    40% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    80% {
+        transform: translateY(0) rotate(0deg);
+        /* Stay for a bit */
+    }
+
+    100% {
+        transform: translateY(100px) rotate(-20deg);
+        /* Hide again */
+    }
+}
+
+.crab-container.walking {
+    animation: crabWalk 15s linear forwards;
+    bottom: 0;
+    /* Align to bottom for walking */
+    transform: translateY(0);
+    /* Reset peek transform */
+}
+
+@keyframes crabWalk {
+    0% {
+        left: -100px;
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 100%;
+        transform: translateY(0) rotate(5deg);
+        opacity: 0;
+    }
+}
+
+/* Falling Elements */
+.falling-element {
+    position: fixed;
+    top: -10vh;
+    font-size: 24px;
+    animation: fall linear forwards;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.text p {
+    margin: 1px 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+    }
+}

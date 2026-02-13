@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Body -->
+  <ellipse cx="50" cy="60" rx="35" ry="25" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+  <!-- Eyes -->
+  <circle cx="35" cy="45" r="5" fill="white" stroke="#c0392b" stroke-width="1"/>
+  <circle cx="35" cy="45" r="2" fill="black"/>
+  <line x1="35" y1="40" x2="35" y2="25" stroke="#c0392b" stroke-width="3"/>
+  
+  <circle cx="65" cy="45" r="5" fill="white" stroke="#c0392b" stroke-width="1"/>
+  <circle cx="65" cy="45" r="2" fill="black"/>
+  <line x1="65" y1="40" x2="65" y2="25" stroke="#c0392b" stroke-width="3"/>
+  
+  <!-- Claws -->
+  <path d="M15 50 Q5 40 10 30 Q15 20 25 30" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+  <path d="M85 50 Q95 40 90 30 Q85 20 75 30" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+
+  <!-- Legs -->
+  <path d="M20 70 L10 80" stroke="#c0392b" stroke-width="3" fill="none"/>
+  <path d="M25 75 L15 85" stroke="#c0392b" stroke-width="3" fill="none"/>
+  <path d="M80 70 L90 80" stroke="#c0392b" stroke-width="3" fill="none"/>
+  <path d="M75 75 L85 85" stroke="#c0392b" stroke-width="3" fill="none"/>
+
+  <!-- Smile -->
+  <path d="M40 65 Q50 70 60 65" stroke="#7f0000" stroke-width="2" fill="none"/>
+</svg>
