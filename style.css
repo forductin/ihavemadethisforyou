@@ -340,11 +340,10 @@ body {
     left: 50%;
     transform: translateX(-50%) translateY(0);
     width: 90%;
-    height: 80%;
+    height: 75%;
     background: var(--letter-bg);
     z-index: 2;
-    /* Inside the envelope */
-    padding: 15px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -353,6 +352,8 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.6s 0.4s ease;
     border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* Hidden Photo Behind Letter */
@@ -401,16 +402,23 @@ body {
 .text {
     font-family: 'Playfair Display', serif;
     color: var(--text-color);
-    font-size: 0.75rem;
-    line-height: 1.2;
+    font-size: 0.65rem;
+    line-height: 1.1;
+    width: 100%;
+    overflow: hidden;
 }
 
 .text strong {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--accent);
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 700;
+}
+
+.text p {
+    font-size: 0.65rem;
+    margin: 0;
 }
 
 .text em {
@@ -425,10 +433,10 @@ body {
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 27px;
-    height: 65px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    width: 50px;
+    height: auto;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     z-index: 15;
 }
 
@@ -534,6 +542,39 @@ button:hover {
         left: 0 !important;
         right: 0 !important;
         margin: 0 auto !important;
+    }
+
+    /* Text content wrapping */
+    .text {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Scale up text when envelope is open */
+    .envelope.open .text {
+        font-size: 0.85rem !important;
+    }
+
+    .envelope.open .text strong {
+        font-size: 1.4rem !important;
+        display: block !important;
+        margin-bottom: 15px !important;
+        word-wrap: break-word !important;
+    }
+
+    .envelope.open .text p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        margin: 8px 0 !important;
+    }
+
+    .envelope.open .sticker {
+        width: 60px !important;
+        margin-bottom: 12px !important;
     }
 
     /* Envelope - force center */
