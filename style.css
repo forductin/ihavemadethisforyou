@@ -664,6 +664,7 @@ button:hover {
     .second-hint {
         font-size: 0.9rem;
         bottom: 5%;
+        white-space: nowrap;
     }
 
     /* Star hint */
@@ -822,6 +823,7 @@ button:hover {
     animation: pulse 2s ease-in-out infinite;
     transition: opacity 0.8s ease;
     z-index: 25;
+    white-space: nowrap;
 }
 
 .second-hint.visible {
